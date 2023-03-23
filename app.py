@@ -6,7 +6,8 @@ app = Flask(__name__)
 
 # Get the movie repository singleton to use throughout the application
 movie_repository = get_movie_repository()
-movie_repository.create_movie("Spider Man: No Way Home", "Director Name, 4 ")
+movie_repository.create_movie("Spider Man: No Way Home", "Director Name", 4)
+
 
 @app.get('/')
 def index():
@@ -35,8 +36,7 @@ def create_movie():
 def search_movies():
     title = request.args.get('title')
     movies = movie_repository.get_movie_by_title(title)
-    rating = movie_repository.get_movie_by_title(request.args.get('title')).rating 
-    return render_template('search_movies.html', search_active=True, movies=movies, rating=rating)
+    return render_template('search_movies.html', search_active=True, movies=movies)
 
 
 @app.get('/movies/<int:movie_id>')
